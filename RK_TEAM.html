@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FF CUP - Gaming App</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    
+    :root {
+      --neon-purple: #c724f1;
+      --neon-blue: #24d2f1;
+      --dark-bg: #0f0e17;
+      --highlight-box: #1a1a2e;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--dark-bg);
+      color: white;
+      overflow-x: hidden;
+      height: 100vh;
+      perspective: 1000px;
+    }
+    
+    /* Quantum Particle Background Effect */
+    .quantum-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(164, 89, 255, 0.6);
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    /* Main Container */
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    /* Header Section */
+    .header-section {
+      width: 100%;
+      text-align: center;
+      position: relative;
+      margin-bottom: 5px;
+    }
+    
+    /* App Logo and Name */
+    .app-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0;
+    }
+    
+    .app-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(164, 89, 255, 0.7));
+    }
+    
+    .app-name {
+      font-size: 32px;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 15px rgba(164, 89, 255, 0.4);
+      margin-top: 5px;
+      line-height: 1.1;
+    }
+    
+    /* Developer Badge */
+    .developer-badge {
+      position: absolute;
+      top: 0px;
+      right: 1px;
+      padding: 6px 12px;
+      background: linear-gradient(45deg, #ff00cc, #3333ff);
+      backdrop-filter: blur(5px);
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 11px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      z-index: 100;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(255,0,204,0.5);
+      overflow: hidden;
+    }
+    
+    .developer-badge::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.1) 50%,
+        rgba(255,255,255,0) 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(30deg); }
+      100% { transform: translateX(100%) rotate(30deg); }
+    }
+    
+    .developer-badge:hover {
+      background: linear-gradient(45deg, #ff00cc, #3399ff);
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(255,0,204,0.7);
+    }
+    
+    /* Content Section */
+    .content-section {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      text-align: center;
+      background: linear-gradient(to right, #fff, #ddd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      text-align: center;
+      line-height: 1.4;
+      opacity: 0.9;
+      margin-bottom: 15px;
+    }
+    
+    /* Important Notice Box */
+    .notice-box {
+      background: var(--highlight-box);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 10px 0;
+      border-left: 4px solid var(--neon-purple);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .notice-title {
+      font-weight: 700;
+      color: var(--neon-blue);
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+    
+    .notice-text {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    
+    /* 3D Floating Character */
+    .character-container {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      margin: 5px 0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .floating-character {
+      width: 200px;
+      height: 220px;
+      background: url('https://i.postimg.cc/x18ncs98/1755076367603.png') center/contain no-repeat;
+      animation: float-3d 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(164, 89, 255, 0.5));
+      transform-style: preserve-3d;
+    }
+    
+    @keyframes float-3d {
+      0%, 100% {
+        transform: translateY(0) rotateX(0) rotateY(0);
+      }
+      50% {
+        transform: translateY(-20px) rotateX(5deg) rotateY(5deg);
+      }
+    }
+    
+    /* Button Section */
+    .button-section {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto 50px auto;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+    
+    .quantum-button {
+      position: relative;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      z-index: 1;
+      text-align: center;
+      text-decoration: none;
+      margin: 6px 0;
+    }
+    
+    .support-button {
+      width: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Download Button with Continuous Border Animation */
+    .download-button {
+      width: 80%;
+      background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+      color: white;
+      box-shadow: 0 0 20px rgba(164, 89, 255, 0.5);
+      animation: pulse 1s infinite, glow 1.5s infinite alternate;
+      border: 2px solid transparent;
+      position: relative;
+    }
+    
+    .download-button::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 100px;
+      background: linear-gradient(45deg, 
+        #ff00cc, #ff0066, #ff00cc, #cc00ff, 
+        #ff00cc, #ff0066, #ff00cc, #cc00ff);
+      background-size: 400% 400%;
+      z-index: -1;
+      animation: borderFlow 4s linear infinite;
+    }
+    
+    @keyframes borderFlow {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 400% 50%;
+      }
+    }
+    
+    /* Added glow animation */
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 20px rgba(164, 89, 255, 0.5);
+      }
+      to {
+        box-shadow: 0 0 20px rgba(164, 89, 255, 0.8), 0 0 30px rgba(164, 89, 255, 0.6);
+      }
+    }
+    
+    .quantum-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(164, 89, 255, 0.3);
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(164, 89, 255, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(164, 89, 255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(164, 89, 255, 0);
+      }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .app-name {
+        font-size: 28px;
+      }
+      
+      .title {
+        font-size: 22px;
+      }
+      
+      .subtitle, .notice-text {
+        font-size: 14px;
+      }
+      
+      .floating-character {
+        width: 180px;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Quantum Particle Background -->
+  <div class="quantum-bg" id="quantumBg"></div>
+  
+  <!-- Main Container -->
+  <div class="main-container">
+    <!-- Header Section -->
+    <div class="header-section">
+      <!-- Developer Badge -->
+      <a href="https://t.me/EBH_5" target="_blank" class="developer-badge">
+        Developer_EBH
+      </a>
+      
+      <!-- App Branding -->
+      <div class="app-brand">
+        <img src="https://i.postimg.cc/qB1Fzpqc/20250813-151958.png" alt="Game Logo" class="app-logo">
+        <div class="app-name">𝐑𝐊_𝐓𝐄𝐀𝐌</div>
+      </div>
+    </div>
+    
+    <!-- Content Section -->
+    <div class="content-section">
+      <h1 class="title">"Change Your Life with Color Trading!"</h1>
+      <p class="subtitle">"Trade colors and win daily rewards of 5,000–50,000 BDT!"</p>
+      
+      <!-- Important Notice Box -->
+      <div class="notice-box">
+        <div class="notice-title">🚀 Special Notice</div>
+        <div class="notice-text">
+          Rabbi Boss Team: Earn Monthly Salary, Daily Commission & Big Deposit Bonuses!.
+        </div>
+      </div>
+      
+      <!-- 3D Floating Character -->
+      <div class="character-container">
+        <div class="floating-character"></div>
+      </div>
+    </div>
+    
+    <!-- Button Section -->
+    <div class="button-section">
+      <a href="https://t.me/rabby10r" target="_blank" class="quantum-button support-button">Support Team</a>
+      <a href="https://drive.usercontent.google.com/download?id=1V6ox3vsjblW6fACH1gnDzMOct1yACohd&export=download&authuser=0" 
+         target="_blank" 
+         class="quantum-button download-button">Download Now</a>
+    </div>
+  </div>
+
+  <script>
+    // Create quantum particles
+    const quantumBg = document.getElementById('quantumBg');
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      // Random position
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      
+      // Random size
+      const size = Math.random() * 4 + 2;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      // Random animation duration
+      particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+      particle.style.animationDelay = `${Math.random() * 5}s`;
+      
+      quantumBg.appendChild(particle);
+    }
+  </script>
+</body>
+</html>
