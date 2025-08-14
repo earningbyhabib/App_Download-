@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>প্রোমো কোড সিস্টেম</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #6c5ce7;
+      --secondary: #a29bfe;
+      --accent: #fd79a8;
+      --success: #00b894;
+      --warning: #fdcb6e;
+      --danger: #d63031;
+      --light: #f5f6fa;
+      --dark: #2d3436;
+      --text: #2d3436;
+      --muted: #636e72;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Hind Siliguri', Arial, sans-serif;
+    }
+    
+    body {
+      background-color: #f8f9fa;
+      color: var(--text);
+      padding: 20px;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    
+    .tagline {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-3px);
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .card-title i {
+      font-size: 20px;
+    }
+    
+    .input-group {
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    .input-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    
+    .input-field {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border 0.3s;
+    }
+    
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #5a4bcf;
+    }
+    
+    .btn-secondary {
+      background: var(--secondary);
+      color: white;
+    }
+    
+    .btn-secondary:hover {
+      background: #9188fd;
+    }
+    
+    .btn-accent {
+      background: var(--accent);
+      color: white;
+    }
+    
+    .btn-accent:hover {
+      background: #fc5d93;
+    }
+    
+    .btn-warning {
+      background: var(--warning);
+      color: var(--dark);
+    }
+    
+    .btn-warning:hover {
+      background: #f9c74f;
+    }
+    
+    .copy-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 18px;
+    }
+    
+    .withdraw-section {
+      display: none;
+      background: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .withdraw-container {
+      background: white;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 15px;
+      padding: 20px;
+      animation: slideUp 0.3s ease;
+    }
+    
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .withdraw-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .withdraw-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    
+    .payment-option {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .payment-option:hover {
+      border-color: var(--primary);
+    }
+    
+    .payment-option.selected {
+      border-color: var(--primary);
+      background: rgba(108, 92, 231, 0.1);
+    }
+    
+    .payment-icon {
+      width: 40px;
+      height: 40px;
+      background: #f5f6fa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      color: var(--primary);
+      font-size: 18px;
+    }
+    
+    .payment-name {
+      font-weight: 600;
+    }
+    
+    .promo-success {
+      color: var(--success);
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    .promo-error {
+      color: var(--danger);
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    .referral-link {
+      background: #f5f6fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    .share-btns {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .share-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    
+    .app-link {
+      font-weight: 600;
+      color: var(--primary);
+      word-break: break-all;
+    }
+    
+    .balance-display {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      margin: 15px 0;
+    }
+    
+    .balance-label {
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    
+    .device-id {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .min-amount {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 5px;
+    }
+    
+    .info-text {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .developer-contact-btn {
+      background: #00bfff;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+      text-align: center;
+      display: block;
+      text-decoration: none;
+    }
+
+    .developer-contact-btn:hover {
+      background: #009acd;
+    }
+
+    .withdraw-history-section {
+      display: none;
+      background: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .withdraw-history-container {
+      background: white;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 15px;
+      padding: 20px;
+      animation: slideUp 0.3s ease;
+    }
+
+    .withdraw-history-list {
+      max-height: 300px;
+      overflow-y: auto;
+      margin: 15px 0;
+    }
+
+    .withdraw-history-item {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Developer Contact Button -->
+    <a href="https://t.me/HS_SIKDAR_BD" class="developer-contact-btn">
+      <i class="fas fa-headset"></i> ডেভেলপার কন্টাক্ট
+    </a>
+
+    <div class="header">
+      <div class="logo">প্রোমো কোড সিস্টেম</div>
+      <div class="tagline">প্রোমো কোড ব্যবহার করে অর্থ উপার্জন করুন</div>
+    </div>
+    
+    <!-- Balance Display -->
+    <div class="card">
+      <div class="balance-label">আপনার ব্যালেন্স</div>
+      <div class="balance-display" id="balanceDisplay">৳0</div>
+      <div class="info-text">ন্যূনতম উত্তোলন পরিমাণ: ৳100</div>
+    </div>
+    
+    <!-- App Link Section -->
+    <div class="card">
+      <div class="card-title">
+        <i class="fas fa-link"></i>
+        শেয়ার করার লিংক
+      </div>
+      <div class="referral-link">
+        <div class="app-link" id="appLink">https://example.com/ref/rabbyboss123</div>
+      </div>
+      <div class="share-btns">
+        <button class="btn btn-secondary" onclick="copyAppLink()">
+          <i class="fas fa-copy"></i> কপি করুন
+        </button>
+        <button class="btn btn-accent" onclick="shareAppLink()">
+          <i class="fas fa-share-alt"></i> শেয়ার করুন
+        </button>
+      </div>
+    </div>
+    
+    <!-- Promo Code Section -->
+    <div class="card">
+      <div class="card-title">
+        <i class="fas fa-gift"></i>
+        আপনার প্রমো কোড
+      </div>
+      <div class="input-group">
+        <input type="text" class="input-field" id="myPromoCode" readonly>
+        <button class="copy-btn" onclick="copyMyPromo()">
+          <i class="fas fa-copy"></i>
+        </button>
+      </div>
+      <div class="info-text">আপনার প্রমো কোড অন্যরা ব্যবহার করলে আপনি পাবেন ৳10</div>
+    </div>
+    
+    <!-- Apply Promo Section -->
+    <div class="card">
+      <div class="card-title">
+        <i class="fas fa-tag"></i>
+        প্রমো কোড ব্যবহার করুন
+      </div>
+      <div class="input-group">
+        <label class="input-label">প্রমো কোড লিখুন</label>
+        <input type="text" class="input-field" id="usePromo" placeholder="এখানে কোড লিখুন">
+      </div>
+      <button class="btn btn-primary" onclick="applyPromo()">
+        <i class="fas fa-check-circle"></i> কোড এপ্লাই করুন
+      </button>
+      <div class="promo-success" id="promoSuccess">
+        <i class="fas fa-check-circle"></i> প্রমো কোড সফলভাবে প্রয়োগ করা হয়েছে!
+      </div>
+      <div class="promo-error" id="promoError">
+        <i class="fas fa-times-circle"></i> প্রমো কোডটি সঠিক নয়!
+      </div>
+    </div>
+    
+    <!-- Withdraw Button -->
+    <div class="card">
+      <button class="btn btn-warning" onclick="openWithdraw()">
+        <i class="fas fa-wallet"></i> উত্তোলন করুন
+      </button>
+      <div class="info-text">আপনার ব্যালেন্স ৳100 বা তার বেশি হলে উত্তোলন করতে পারবেন</div>
+    </div>
+
+    <!-- Withdraw History Button -->
+    <button id="withdraw-history-btn" class="btn" style="background: #6c757d; margin-top: 20px;" onclick="showWithdrawHistory()">
+      <i class="fas fa-history"></i> উত্তোলন হিস্ট্রি
+    </button>
+    
+    <div class="device-id" id="deviceId"></div>
+  </div>
+  
+  <!-- Withdraw Modal -->
+  <div class="withdraw-section" id="withdrawSection">
+    <div class="withdraw-container">
+      <div class="withdraw-header">
+        <div class="withdraw-title">উত্তোলন করুন</div>
+        <button class="close-btn" onclick="closeWithdraw()">&times;</button>
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">আপনার নাম</label>
+        <input type="text" class="input-field" id="withdrawName" placeholder="আপনার পুরো নাম">
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">মোবাইল নম্বর</label>
+        <input type="text" class="input-field" id="withdrawNumber" placeholder="01XXXXXXXXX">
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">পরিমাণ (৳)</label>
+        <input type="number" class="input-field" id="withdrawAmount" placeholder="টাকার পরিমাণ" min="100">
+      </div>
+      
+      <div class="input-group">
+        <label class="input-label">পেমেন্ট মেথড নির্বাচন করুন</label>
+        
+        <div class="payment-option" onclick="selectPayment(this, 'bkash')">
+          <div class="payment-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <div class="payment-name">বিকাশ</div>
+        </div>
+        
+        <div class="payment-option" onclick="selectPayment(this, 'nagad')">
+          <div class="payment-icon">
+            <i class="fas fa-wallet"></i>
+          </div>
+          <div class="payment-name">নগদ</div>
+        </div>
+        
+        <div class="payment-option" onclick="selectPayment(this, 'rocket')">
+          <div class="payment-icon">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <div class="payment-name">রকেট</div>
+        </div>
+      </div>
+      
+      <input type="hidden" id="selectedPayment">
+      
+      <button class="btn btn-primary" onclick="submitWithdraw()">
+        <i class="fas fa-paper-plane"></i> উত্তোলন রিকোয়েস্ট পাঠান
+      </button>
+    </div>
+  </div>
+
+  <!-- Withdraw History Section -->
+  <div class="withdraw-history-section" id="withdrawHistorySection">
+    <div class="withdraw-history-container">
+      <div class="withdraw-header">
+        <div class="withdraw-title">উত্তোলন হিস্ট্রি</div>
+        <button class="close-btn" onclick="closeWithdrawHistory()">&times;</button>
+      </div>
+      
+      <div class="withdraw-history-list" id="withdrawHistoryList">
+        <!-- History items will be added here dynamically -->
+      </div>
+      
+      <button class="btn btn-primary" onclick="closeWithdrawHistory()">
+        <i class="fas fa-times"></i> বন্ধ করুন
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // টেলিগ্রাম বট কনফিগারেশন
+    const BOT_TOKEN = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
+    const CHAT_ID = "6140196943";
+    const MIN_WITHDRAWAL = 100;
+
+    // ডিভাইস আইডি জেনারেট করুন
+    function generateDeviceId() {
+      let deviceId = localStorage.getItem('deviceId');
+      if (!deviceId) {
+        deviceId = 'device_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('deviceId', deviceId);
+      }
+      document.getElementById('deviceId').textContent = `ডিভাইস ID: ${deviceId}`;
+      return deviceId;
+    }
+
+    // প্রোমো কোড জেনারেট করুন
+    function generatePromoCode() {
+      return 'PROMO' + Math.floor(10000 + Math.random() * 90000);
+    }
+
+    // ইউজার ডাটা ইনিশিয়ালাইজ করুন
+    function initializeUser() {
+      const deviceId = generateDeviceId();
+      
+      let balance = parseFloat(localStorage.getItem('balance')) || 0;
+      
+      let myCode = localStorage.getItem('myPromoCode');
+      if (!myCode) {
+        myCode = generatePromoCode();
+        localStorage.setItem('myPromoCode', myCode);
+      }
+      
+      let usedPromos = JSON.parse(localStorage.getItem('usedPromos')) || [];
+      let withdrawHistory = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
+      
+      return { balance, myCode, usedPromos, deviceId, withdrawHistory };
+    }
+
+    // ব্যালেন্স ডিসপ্লে আপডেট করুন
+    function updateBalanceDisplay(balance) {
+      document.getElementById('balanceDisplay').textContent = `৳${balance.toFixed(2)}`;
+    }
+
+    // বর্তমান ইউজার ডাটা
+    const user = initializeUser();
+    document.getElementById('myPromoCode').value = user.myCode;
+    updateBalanceDisplay(user.balance);
+
+    // উত্তোলন মডাল ফাংশন
+    function openWithdraw() {
+      document.getElementById('withdrawSection').style.display = 'flex';
+    }
+
+    function closeWithdraw() {
+      document.getElementById('withdrawSection').style.display = 'none';
+    }
+
+    function selectPayment(element, method) {
+      document.querySelectorAll('.payment-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      element.classList.add('selected');
+      document.getElementById('selectedPayment').value = method;
+    }
+
+    // উত্তোলন হিস্ট্রি দেখান
+    function showWithdrawHistory() {
+      const historyList = document.getElementById('withdrawHistoryList');
+      historyList.innerHTML = '';
+      
+      if (user.withdrawHistory.length === 0) {
+        historyList.innerHTML = '<div style="text-align: center; padding: 20px;">কোন উত্তোলন হিস্ট্রি পাওয়া যায়নি</div>';
+      } else {
+        user.withdrawHistory.forEach((record, index) => {
+          const item = document.createElement('div');
+          item.className = 'withdraw-history-item';
+          
+          const methodNames = {
+            'bkash': 'বিকাশ',
+            'nagad': 'নগদ',
+            'rocket': 'রকেট'
+          };
+          
+          item.innerHTML = `
+            <div>
+              <strong>#${index + 1}</strong>
+              <div>${methodNames[record.method]}</div>
+              <small>${new Date(record.timestamp).toLocaleString()}</small>
+            </div>
+            <div style="text-align: right;">
+              <strong>৳${record.amount.toFixed(2)}</strong>
+              <div style="color: ${record.status === 'Completed' ? 'green' : 'orange'}">
+                ${record.status}
+              </div>
+            </div>
+          `;
+          
+          historyList.appendChild(item);
+        });
+      }
+      
+      document.getElementById('withdrawHistorySection').style.display = 'flex';
+    }
+
+    function closeWithdrawHistory() {
+      document.getElementById('withdrawHistorySection').style.display = 'none';
+    }
+
+    // উত্তোলন সাবমিট করুন
+    async function submitWithdraw() {
+      const name = document.getElementById('withdrawName').value.trim();
+      const number = document.getElementById('withdrawNumber').value.trim();
+      const amount = parseFloat(document.getElementById('withdrawAmount').value);
+      const method = document.getElementById('selectedPayment').value;
+      
+      // ভ্যালিডেশন চেক
+      if (!name || !number || isNaN(amount) || !method) {
+        alert("সব তথ্য পূরণ করুন!");
+        return;
+      }
+      
+      if (!/^01\d{9}$/.test(number)) {
+        alert("সঠিক মোবাইল নম্বর লিখুন (01XXXXXXXXX)!");
+        return;
+      }
+      
+      if (amount < MIN_WITHDRAWAL) {
+        alert(`ন্যূনতম উত্তোলন পরিমাণ ৳${MIN_WITHDRAWAL}`);
+        return;
+      }
+      
+      if (amount > user.balance) {
+        alert(`আপনার ব্যালেন্স পর্যাপ্ত নয়! আপনার ব্যালেন্স: ৳${user.balance.toFixed(2)}`);
+        return;
+      }
+      
+      // উত্তোলন মেসেজ প্রস্তুত করুন
+      const paymentMethods = {
+        'bkash': 'বিকাশ',
+        'nagad': 'নগদ',
+        'rocket': 'রকেট'
+      };
+      
+      const message = `
+      নতুন উত্তোলন রিকোয়েস্ট!
+      নাম: ${name}
+      নম্বর: ${number}
+      পরিমাণ: ৳${amount.toFixed(2)}
+      পদ্ধতি: ${paymentMethods[method]}
+      প্রোমো কোড: ${user.myCode}
+      ডিভাইস ID: ${user.deviceId}
+      ব্যালেন্স: ৳${user.balance.toFixed(2)}
+      সময়: ${new Date().toLocaleString()}
+      `;
+      
+      try {
+        // টেলিগ্রাম API রিকোয়েস্ট
+        const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: message,
+            parse_mode: 'HTML'
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Telegram API error');
+        }
+
+        // ব্যালেন্স আপডেট করুন
+        user.balance -= amount;
+        localStorage.setItem('balance', user.balance);
+        updateBalanceDisplay(user.balance);
+
+        // উত্তোলন হিস্ট্রিতে যোগ করুন
+        const withdrawRecord = {
+          amount: amount,
+          method: method,
+          timestamp: Date.now(),
+          status: 'Pending'
+        };
+        
+        user.withdrawHistory.unshift(withdrawRecord);
+        localStorage.setItem('withdrawHistory', JSON.stringify(user.withdrawHistory));
+
+        // সাফল্য মেসেজ এবং ফর্ম রিসেট
+        alert(`আপনার ৳${amount.toFixed(2)} টাকার উত্তোলন রিকোয়েস্ট পাঠানো হয়েছে!`);
+        closeWithdraw();
+        
+        // ফর্ম ক্লিয়ার করুন
+        document.getElementById('withdrawName').value = '';
+        document.getElementById('withdrawNumber').value = '';
+        document.getElementById('withdrawAmount').value = '';
+        document.querySelectorAll('.payment-option').forEach(opt => {
+          opt.classList.remove('selected');
+        });
+
+      } catch (error) {
+        console.error('Error:', error);
+        alert("রিকোয়েস্ট পাঠানো যায়নি। পরে আবার চেষ্টা করুন।");
+      }
+    }
+
+    // কপি ফাংশন
+    function copyAppLink() {
+      const link = document.getElementById('appLink');
+      navigator.clipboard.writeText(link.innerText)
+        .then(() => alert('লিংক কপি করা হয়েছে!'))
+        .catch(() => {
+          const textarea = document.createElement('textarea');
+          textarea.value = link.innerText;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          alert('লিংক কপি করা হয়েছে!');
+        });
+    }
+
+    function copyMyPromo() {
+      const promoCode = document.getElementById('myPromoCode');
+      navigator.clipboard.writeText(promoCode.value)
+        .then(() => alert('প্রোমো কোড কপি করা হয়েছে!'))
+        .catch(() => {
+          promoCode.select();
+          document.execCommand('copy');
+          alert('প্রোমো কোড কপি করা হয়েছে!');
+        });
+    }
+
+    // শেয়ার ফাংশন
+    function shareAppLink() {
+      const link = document.getElementById('appLink').innerText;
+      if (navigator.share) {
+        navigator.share({
+          title: 'আমার রেফার লিংক',
+          text: 'এই লিংক ব্যবহার করে জয়েন করুন',
+          url: link
+        }).catch(err => {
+          console.log('Error sharing:', err);
+        });
+      } else {
+        window.open(`https://wa.me/?text=${encodeURIComponent('আমার রেফার লিংক: ' + link)}`, '_blank');
+      }
+    }
+
+    // প্রোমো কোড এপ্লাই করুন
+    async function applyPromo() {
+      const input = document.getElementById('usePromo').value.trim().toUpperCase();
+      const promoSuccess = document.getElementById('promoSuccess');
+      const promoError = document.getElementById('promoError');
+      
+      promoError.style.display = 'none';
+      promoSuccess.style.display = 'none';
+      
+      // ভ্যালিডেশন চেক
+      if (input === "") {
+        promoError.innerText = "প্রোমো কোড লিখুন!";
+        promoError.style.display = 'block';
+        return;
+      }
+      
+      if (!input.startsWith("PROMO") || input.length !== 10 || isNaN(input.substring(5))) {
+        promoError.innerText = "অবৈধ প্রোমো কোড ফরম্যাট!";
+        promoError.style.display = 'block';
+        return;
+      }
+      
+      if (input === user.myCode) {
+        promoError.innerText = "নিজের প্রোমো কোড ব্যবহার করা যাবে না!";
+        promoError.style.display = 'block';
+        return;
+      }
+      
+      if (user.usedPromos.includes(input)) {
+        promoError.innerText = "আপনি ইতিমধ্যেই এই প্রোমো কোড ব্যবহার করেছেন!";
+        promoError.style.display = 'block';
+        return;
+      }
+      
+      // প্রোমো কোড ভ্যালিড, নোটিফিকেশন পাঠান
+      const promoMessage = `
+      নতুন প্রোমো কোড ব্যবহার!
+      ব্যবহারকারীর কোড: ${user.myCode}
+      ব্যবহৃত কোড: ${input}
+      ডিভাইস ID: ${user.deviceId}
+      `;
+      
+      try {
+        const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: promoMessage,
+            parse_mode: 'HTML'
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Telegram API error');
+        }
+
+        // ব্যবহৃত প্রোমো কোডে যোগ করুন
+        user.usedPromos.push(input);
+        localStorage.setItem('usedPromos', JSON.stringify(user.usedPromos));
+        
+        // সাফল্য মেসেজ দেখান
+        promoSuccess.innerHTML = `<i class="fas fa-check-circle"></i> প্রোমো কোড সফল! কোড মালিক পাবেন ৳10`;
+        promoSuccess.style.display = 'block';
+        
+        // ইনপুট ক্লিয়ার করুন
+        document.getElementById('usePromo').value = '';
+
+      } catch (error) {
+        console.error('Error:', error);
+        promoError.innerText = "প্রোমো কোড ভেরিফিকেশন ব্যর্থ, পরে চেষ্টা করুন";
+        promoError.style.display = 'block';
+      }
+    }
+
+    // মডালের বাইরে ক্লিক করলে বন্ধ করুন
+    document.getElementById('withdrawSection').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeWithdraw();
+      }
+    });
+
+    document.getElementById('withdrawHistorySection').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeWithdrawHistory();
+      }
+    });
+  </script>
+</body>
+</html>
