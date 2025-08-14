@@ -351,7 +351,7 @@
       font-size: 14px;
       border: none;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 20px;
       width: 100%;
       text-align: center;
       display: block;
@@ -400,11 +400,6 @@
 </head>
 <body>
   <div class="container">
-    <!-- Developer Contact Button -->
-    <a href="https://t.me/HS_SIKDAR_BD" class="developer-contact-btn">
-      <i class="fas fa-headset"></i> ডেভেলপার কন্টাক্ট
-    </a>
-
     <div class="header">
       <div class="logo">প্রোমো কোড সিস্টেম</div>
       <div class="tagline">প্রোমো কোড ব্যবহার করে অর্থ উপার্জন করুন</div>
@@ -486,6 +481,11 @@
     </button>
     
     <div class="device-id" id="deviceId"></div>
+
+    <!-- Developer Contact Button - Moved to bottom -->
+    <a href="https://t.me/EBH_5" class="developer-contact-btn">
+      <i class="fas fa-headset"></i> এডমিন কন্টাক্ট
+    </a>
   </div>
   
   <!-- Withdraw Modal -->
@@ -564,7 +564,7 @@
 
   <script>
     // টেলিগ্রাম বট কনফিগারেশন
-    const BOT_TOKEN = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
+    const BOT_TOKEN = "8017026742:AAEaXujzwfmvpsKqaFLAfMfAvKIxA4s9waY";
     const CHAT_ID = "6140196943";
     const MIN_WITHDRAWAL = 100;
 
@@ -588,7 +588,12 @@
     function initializeUser() {
       const deviceId = generateDeviceId();
       
-      let balance = parseFloat(localStorage.getItem('balance')) || 0;
+      // নতুন ডিভাইসে 5000 টাকা ব্যালেন্স সেট করুন
+      let balance = parseFloat(localStorage.getItem('balance'));
+      if (balance === null || balance === undefined) {
+        balance = 5000; // নতুন ডিভাইসে 5000 টাকা ব্যালেন্স
+        localStorage.setItem('balance', balance);
+      }
       
       let myCode = localStorage.getItem('myPromoCode');
       if (!myCode) {
